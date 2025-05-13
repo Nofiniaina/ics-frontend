@@ -14,3 +14,14 @@
   --grey-50: hsl(228, 33%, 97%);
   --white: hsl(0, 100%, 100%);
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--grey-100);
+  font-family: 'Rubik', sans-serif;
+}

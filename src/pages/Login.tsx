@@ -1,0 +1,60 @@
+import { useState } from "react";
+import axios from "axios";
+
+interface LoginProps {
+    username: string;
+    password: string;
+}
+
+function Login(){
+    const [user, setUser] = useState<LoginProps>({
+        username: "",
+        password: "",
+    });
+    const [error, setError] = useState<string | null>(null);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            await axios
+                .post("http://localhost:3000/api/users/login", user)
+                .then((response) => {
+                    console.log(response.data);
+                })
+                .catch((error) => {
+                    console.log(error.response.data.message);
+                })
+            ;
+        } catch (error) {
+            
+        }
+    } 
+
+    return(
+        <div className="login-container">
+            <h1>Login</h1>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor="">Username</label>
+                    <input type="text" 
+                        value={user.username}
+                        onChange={(e) => setUser({ ...user, username: e.target.value })}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="">Password</label>
+                    <input type="password" 
+                        value={user.password}
+                        onChange={(e) => setUser({ ...user, password: e.target.value })}
+                    />
+                </div>
+                <button type="submit">Log in</button>
+            </form>
+            <div className="signup-link">
+                <p>Don't have an account? <a href="/signup">Sign up</a></p>
+            </div>
+        </div>
+    );
+}
+
+export default Login;
