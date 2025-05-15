@@ -1,0 +1,45 @@
+.parent {
+    margin-top: 40px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.home-container {
+    width: 500px;
+}
+
+.pub-container {
+    padding: 20px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+}
+
+form div input {
+    height: 35px;
+    /* border-radius: 10px; */
+}
+
+form div textarea {
+    height: 100px;
+    /* border-radius: 10px; */
+}
+
+button {
+    height: 40px;
+    border-radius: 10px;
+    color: white;
+    background-color: var(--purple-600);
+}
