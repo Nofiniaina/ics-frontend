@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { api } from "../api/axios";
 
 interface PostProps {
     user: string;
@@ -15,8 +16,8 @@ function PubFeed(){
     });
 
     async function fetchPost(){
-        await axios
-            .get("http://localhost:3000/api/posts/all")
+        await api
+            .get("posts/all")
             .then((response) =>{
                 console.log(response.data);
             } )

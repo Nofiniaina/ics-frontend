@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { api } from "../api/axios";
 
 interface LoginProps {
     username: string;
@@ -18,19 +19,18 @@ function Login(){
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await axios
-                .post("http://localhost:3000/api/users/login", user)
-                .then((response) => {
+            await api
+                .post("/users/login", user)
+                .then((response) =>{
                     const token = response.data.token;
                     localStorage.setItem("userToken", token);
                     navigate("/home");
                 })
-                .catch((error) => {
+                .catch((error)=>{
                     console.log(error.response.data.message);
                 })
-            ;
         } catch (error) {
-            
+            console.error(error);
         }
     } 
 
