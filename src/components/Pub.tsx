@@ -1,9 +1,17 @@
 
 
+interface User {
+    _id: string;
+    username: string;
+    email: string;
+}
+
 interface PostProps {
-    user: string;
+    _id: string;
+    user: User;
     title: string;
     content: string;
+    createdAt: string;
 }
 
 function Pub( post  : PostProps ){
@@ -13,8 +21,8 @@ function Pub( post  : PostProps ){
 
             <div className="pub-header">
                 <div className="user">
-                    <img src="" alt="" />
-                    <p>Username: {post.user}</p>
+                    {/* <img src="" alt="" /> */}
+                    <p>Username: {post.user.username}</p>
                 </div>
                 <div className="options">
                     ...

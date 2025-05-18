@@ -1,37 +1,54 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { api } from "../api/axios";
+import Pub from "./Pub";
+
+interface User {
+    _id: string;
+    username: string;
+    email: string;
+}
 
 interface PostProps {
-    user: string;
+    _id: string;
+    user: User;
     title: string;
     content: string;
+    createdAt: string;
 }
 
 function PubFeed(){
-    const [post, setPost] = useState<PostProps>({
-        user: "",
-        title: "",
-        content: ""
-    });
+    const [posts, setPosts] = useState<PostProps[]>([]);
 
     async function fetchPost(){
         await api
             .get("posts/all")
             .then((response) =>{
-                console.log(response.data);
+                setPosts(response.data);
             } )
     }
 
     useEffect(() => {
         fetchPost();
-    }, [post]);
+    }, []);
 
+    useEffect(() => {
+        fetchPost();
+    }, [posts]);
 
     return(
         <div>
             {
-                
+                posts.map((post) =>{
+                    return(
+                        // <div key={post._id} className="pub">
+                        //     <h2>{post.title}</h2>
+                        //     <p>{post.content}</p>
+                        //     <p>Posted by: {post.user.username}</p>
+                        //     <p>Created at: {new Date(post.createdAt).toLocaleString()}</p>
+                        // </div>
+                        <Pub key={post._id} {...post} />
+                    )
+                } )
             }
         </div>
     );
